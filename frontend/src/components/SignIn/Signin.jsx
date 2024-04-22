@@ -6,12 +6,7 @@ import { useAuth } from "../../Contexts/AuthContext";
 
 const Signin = () => {
   const navigate = useNavigate();
-  const  {
-    authUser,
-    setAuthUser,
-    isloggedin,
-    setIsloggedin
-} = useAuth();
+  const { authUser, setAuthUser, isloggedin, setIsloggedin } = useAuth();
   const [email_id, setEmail_id] = useState("");
   const [password, setPassword] = useState("");
   const loginUser = async (e) => {
@@ -29,16 +24,13 @@ const Signin = () => {
 
     const data = await res.json();
     if (res.status === 200 && data) {
-      localStorage.setItem('token',data.token)
-     
+      localStorage.setItem("token", data.token);
+
       window.alert("Login Successful");
       navigate("/");
-    }
-    else if(res.status === 403)
-    {
+    } else if (res.status === 403) {
       window.alert("Invalid Credentials");
-    }
-     else {
+    } else {
       window.alert(" Uhh! We are experiencing some problems with our Server.");
     }
     ///
@@ -71,14 +63,12 @@ const Signin = () => {
     e.preventDefault();
 
     const { name, email_id, password, c_password } = user;
-    var domain = email_id.substring(email_id.lastIndexOf("@") +1);
-    if(domain!='vitbhopal.ac.in')
-    {
+    var domain = email_id.substring(email_id.lastIndexOf("@") + 1);
+    if (domain != "vitbhopal.ac.in") {
       return alert("Only VIT institutional email ID's allowed.");
     }
-    if(password!=c_password)
-    {
-      return alert("Passwords does not match  "); 
+    if (password != c_password) {
+      return alert("Passwords does not match  ");
     }
 
     const res = await fetch("http://localhost:5000/register", {
@@ -94,23 +84,19 @@ const Signin = () => {
     });
 
     const data = await res.json();
-    console.log(data)
+    console.log(data);
     if (data.status === 422 || !data) {
       window.alert("Invalid Registeration");
       console.log("Invalid Registration");
-    } 
-    else if (data.status === 400 || !data) {
+    } else if (data.status === 400 || !data) {
       window.alert("Only VIT institutional email ID's allowed");
-    } 
-    else if (data.status === 404 || !data) {
+    } else if (data.status === 404 || !data) {
       window.alert("Issue Encountered");
-    } 
-    else {
-       {
+    } else {
+      {
         window.alert("Registeration Successfull");
-        console.log("Registration Successful");       
+        console.log("Registration Successful");
         setIsContainerActive(false);
-   
       }
     }
   };
@@ -125,7 +111,9 @@ const Signin = () => {
           <form action="#">
             <div className="H1">Create Account</div>
 
-            <span id="Span">Use your @vitbhopal.ac.in email for registration</span>
+            <span id="Span">
+              Use your @vitbhopal.ac.in email for registration
+            </span>
             <input
               type="text"
               name="name"

@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { useState } from "react";
 import Chat from "./Chat";
-import  './css/style.css';
+import './css/style.css';
 
 const socket = io.connect("http://localhost:5000");
 

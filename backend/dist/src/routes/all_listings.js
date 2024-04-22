@@ -6,8 +6,8 @@ var __awaiter =
       return value instanceof P
         ? value
         : new P(function (resolve) {
-            resolve(value);
-          });
+          resolve(value);
+        });
     }
     return new (P || (P = Promise))(function (resolve, reject) {
       function fulfilled(value) {
@@ -38,21 +38,23 @@ var __importDefault =
     return mod && mod.__esModule ? mod : { default: mod };
   };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Importing required libraries
+
 const express_1 = __importDefault(require("express"));
 const userSchema_1 = __importDefault(require("../models/userSchema"));
-// Using Express Router Class
 const router = express_1.default.Router();
-// Get the whole data from the database
+
+
+// Fetching the whole data from the database
+
 router.get("/", (req, res) =>
   __awaiter(void 0, void 0, void 0, function* () {
     try {
-      // const user = await User.find({});
+      
       const user = yield userSchema_1.default.find({}).select({ list: 1 });
       console.log(user);
       res.status(200).send(user);
     } catch (err) {
-      // Consoling error for proper debugging.
+      
       console.log(err);
       res
         .status(500)

@@ -1,12 +1,12 @@
-import React from 'react'
-import HeaderSearch from './HeaderSearch'
-import Listing from './Listing'
+import React from "react";
+import HeaderSearch from "./HeaderSearch";
+import Listing from "./Listing";
 const Home = () => {
   return (
     <div>
-        <Listing/>
+      <Listing />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -48,7 +48,7 @@ const Aboutus = () => {
     });
 };
 
-
+//delete note
 const deleteNote = (id) => {
   const newNotes = notes.filter((note) => note.id !== id);
   setNotes(newNotes);

@@ -26,11 +26,8 @@ const ContactUs = () => {
                   For all enquiries, please email us using the given form
                 </p>
                 <p className="text-2xl font-medium text-body-color leading-relaxed mb-9 mx-5">
-                  Based in{" "}
-                  <span className="font-bold italic">
-                    VIT BHOPAL
-                  </span>
-                  , available for campus Students.
+                  Based in <span className="font-bold italic">VIT BHOPAL</span>,
+                  available for campus Students.
                 </p>
               </div>
             </div>

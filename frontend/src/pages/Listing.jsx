@@ -7,7 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import data from "../components/message.json";
 import KnowMore from "./KnowMore";
 import { ClassNames } from "@emotion/react";
-import axios from "axios"
+import axios from "axios";
 import Listingg from "./Listingg";
 
 const image1 = require("../assets/img/icons8-age-100.png");
@@ -23,10 +23,10 @@ const Listing = () => {
     x5 = 0,
     x6 = 0,
     x = 0;
-  const [userData,setUserData]=useState([])
+  const [userData, setUserData] = useState([]);
   const [Data, setData] = useState();
   const [dat, setdat] = useState();
-  const [result,setResult]=useState();
+  const [result, setResult] = useState();
   const [isFetching, setIsFetching] = useState(true);
 
   const CallAboutPage = async () => {
@@ -35,7 +35,7 @@ const Listing = () => {
     try {
       console.log("tried");
       const res = await axios("http://localhost:5000/db", {
-        mode:'no-cors',
+        mode: "no-cors",
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -43,14 +43,12 @@ const Listing = () => {
         },
         credentials: "include",
       });
-      const object=await res.data
+      const object = await res.data;
       setUserData(object);
-      // console.log(res);
       filterr(object);
       setData(object);
       setdat(object);
-      // console.log(object);
-      // console.log(userData)
+
       setIsFetching(false);
       if (!res.status === 201) {
         const error = new Error(res.error);
@@ -59,8 +57,6 @@ const Listing = () => {
         );
         throw error;
       }
-      // setResult(res.data);
-      // console.log(result)
     } catch (err) {
       console.log(err);
       console.log("caught error");
@@ -70,36 +66,8 @@ const Listing = () => {
 
   const fetchDataFromBackend = async () => {
     const res = await axios("http://localhost:5000/db");
-    setResult(res.data[0].list[0])
-    // console.log(res.data[0].list[0]);
-    // console.log(res.data[0].list[0].item_name);
-    
-  }
-
-  // useEffect(() => {
-  //   fetchDataFromBackend();
-  
-  // }, [])
-
-  // const searchtags = (e) => {
-  //   // CallAboutPage();
-  //   const ress = Data.filter((currentValue) => {
-  //     currentValue.list = currentValue.list.filter((currentVal) => {
-  //       console.log(currentVal.item_name);
-  //       console.log(e.target.value);
-  //       console.log("space")
-  //       if (currentVal.item_name === undefined) {
-
-  //       }
-  //       else {
-  //         return currentVal.item_name.toLowerCase().includes(e.target.value);
-  //       }
-  //     });
-  //     return currentValue.list.length !== 0;
-  //   });
-  //   setdat(ress);
-  //   console.log(ress);
-  // };
+    setResult(res.data[0].list[0]);
+  };
 
   const searchtags = (e) => {
     console.log(dat);
@@ -116,27 +84,7 @@ const Listing = () => {
       };
     });
     setdat(ress);
-    // console.log(ress);
   };
-
-  // const filtertags = (val, b) => {
-  //   // CallAboutPage();
-  //   console.log(Data);
-  //   console.log(dat);
-  //   const res = Data.filter((currentValue) => {
-  //     currentValue.list = currentValue.list.filter((currentVal) => {
-  //       console.log(currentVal.item_tag);
-  //       console.log(val);
-  //       console.log("space");
-  //       if (val === "") return currentVal;
-  //       else return currentVal.item_tag === val;
-  //     });
-  //     return currentValue.list.length !== 0;
-  //   });
-  //   setdat(res);
-  //   console.log(res);
-  //   console.log(dat);
-  // };
 
   const filtertags = (val, b) => {
     console.log(dat);
@@ -151,24 +99,21 @@ const Listing = () => {
       };
     });
     setdat(res);
-    // console.log(res);
   };
 
   const filterr = (object) => {
     const res = object.filter((currentValue) => {
-      // if (val === "") return currentValue;
       return currentValue.list.length !== 0;
     });
     setData(res);
     setdat(res);
-    // console.log(res);
   };
 
   useEffect(() => {
     CallAboutPage();
   }, []);
 
- {
+  {
     return (
       <>
         <div class="">
@@ -192,7 +137,6 @@ const Listing = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row bg-bg">
-          {/* <div className=" bg-transparent lg:w-[95%]"> */}
           <div className="w-[] lg:w-[340px] bg-white mb-3 mt-3  mr-10 lg:mr-0 lg:ml-3 rounded-sm  block lg:sticky top-3 shadow-md shadow-gray-600 h-fit m-auto">
             <Accordion alwaysOpen={true}>
               <Accordion.Panel>
@@ -291,9 +235,7 @@ const Listing = () => {
             </Accordion>
           </div>
           <div className=" before:hidden items-center justify-items-center grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-3 p-[1%] w-[100%] md:w-[90%] lg:w-[75%] sm:mx-0 md:mx-auto lg:mx-auto">
-            
-           
-             {dat?.map((dataa) => {
+            {dat?.map((dataa) => {
               return (
                 <>
                   {dataa.list.map((listt) => {
@@ -361,21 +303,16 @@ const Listing = () => {
               );
             })}
 
-            {
-              result?.map((item, index) => {
-                return(
-                  <div key={index}>
-                    <div>
-                      {item.item_name}
-                      <p>Item Age: {item.item_age}</p>
-                    </div>
+            {result?.map((item, index) => {
+              return (
+                <div key={index}>
+                  <div>
+                    {item.item_name}
+                    <p>Item Age: {item.item_age}</p>
                   </div>
-                )
-              })
-            }
-            
-            {/* <Listingg /> */}
-
+                </div>
+              );
+            })}
           </div>
         </div>
       </>

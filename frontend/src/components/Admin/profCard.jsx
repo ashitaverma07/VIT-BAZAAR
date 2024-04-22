@@ -21,7 +21,7 @@ function AdminCards(props) {
             {props.productInfo}
           </p>
         </div>
-        
+
       </a>
     </div>
   );

@@ -7,7 +7,7 @@ import data from "../components/message.json";
 import Chat from "../components/Chat/ChatApp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from 'axios'
+import axios from "axios";
 function KnowMore() {
   const location = useLocation();
   console.log(location.state.item_id);
@@ -15,31 +15,18 @@ function KnowMore() {
   const [isFetching, setIsFetching] = useState(true);
   const a = ["", "bad", "average", "good", "very good", "excellent"];
 
-  const[isBotVisible, setIsBotVisible] = useState(false);
+  const [isBotVisible, setIsBotVisible] = useState(false);
 
   const CallAboutPage = async () => {
     setIsFetching(true);
     console.log("Call about");
     try {
       console.log("tried");
-      // const res = await fetch("http://localhost:5000/db", {
-      //   mode:"no-cors",
-      //   method: "GET",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      //   credentials: "include",
-      // });
-      const res=await axios.get('http://localhost:5000/db')
-      // console.log(res.data)
+
+      const res = await axios.get("http://localhost:5000/db");
       const object = await res.data;
-      // setUserData(object);
-      // console.log(userData)
-      // console.log(object);
+
       filtertags(object);
-      // setData(object);
-      // console.log(Data);
 
       setIsFetching(false);
       if (!res.status === 201) {
@@ -53,24 +40,9 @@ function KnowMore() {
       console.log(err);
       console.log("caught error");
       setIsFetching(false);
-      // navigate("/signin");
     }
   };
 
-  // const filtertags =  (object) => {
-  //   console.log("hi");
-  //   console.log(location.state.item_id);
-  //   const res = object.filter((currentValue) => {
-  //     return( currentValue.list.map((lis)=>{
-  //       return lis._id === location.state.item_id;
-
-  //     })
-  //     )
-  //   });
-  //   setData(res);
-  //   console.log(res);
-  //   // console.log();
-  // };
   const filtertags = (object) => {
     const res = object.filter((currentValue) => {
       currentValue.list = currentValue.list.filter((currentVal) => {
@@ -87,8 +59,6 @@ function KnowMore() {
 
   useEffect(() => {
     CallAboutPage();
-    // console.log(Data);
-    // filtertags();
   }, []);
 
   const [col, setCol] = useState("white");
@@ -228,38 +198,7 @@ function KnowMore() {
                 <p class="leading-relaxed pb-5 mb-5">
                   {Data[0].list[0].item_description}
                 </p>
-                {/* <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
-                <div class="flex">
-                  <span class="mr-3">Color</span>
-                  <button class="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
-                  <button class="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
-                  <button class="border-2 border-gray-300 ml-1 bg-red-500 rounded-full w-6 h-6 focus:outline-none"></button>
-                </div>
-                <div class="flex ml-6 items-center">
-                  <span class="mr-3">Size</span>
-                  <div class="relative">
-                    <select class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
-                      <option>SM</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
-                    </select>
-                    <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        class="w-4 h-4"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              </div> */}
+
                 <div class="flex border-b-2 border-gray-200 pb-5">
                   <span class="title-font font-medium text-2xl text-gray-900">
                     ₹{Data[0].list[0].item_price}
@@ -298,18 +237,34 @@ function KnowMore() {
                     </ul>
                   </div>
                 </div>
-                <button className=""
+                <button
+                  className=""
                   onClick={() => setIsBotVisible(!isBotVisible)}
-                ><span className="bg-blue-500 rounded-xl px-4 py-1 text-white text-xl"> Chat </span>
-                <div id="tars-fullpage-container" class="tars-fullpage-container-class">
-                  <iframe id="tars-fullpage" width="100%"
-                    // style={`${display= ""}`}
-                    className={`mt-2 shadow-lg min-h-[400px] max-w-[450px] rounded-lg ${isBotVisible ?'block':'hidden'}`}
-                    height="100%" frameborder="0" allow="geolocation; microphone; camera; midi; encrypted-media;"
-                    src="https://chatbot.hellotars.com/conv/PWIlnd/">
-                  </iframe>
-                  <script type="text/javascript" src="https://tars-file-upload.s3.amazonaws.com/bulb/js/fullpage.js"></script>
-                </div>
+                >
+                  <span className="bg-blue-500 rounded-xl px-4 py-1 text-white text-xl">
+                    {" "}
+                    Chat{" "}
+                  </span>
+                  <div
+                    id="tars-fullpage-container"
+                    class="tars-fullpage-container-class"
+                  >
+                    <iframe
+                      id="tars-fullpage"
+                      width="100%"
+                      className={`mt-2 shadow-lg min-h-[400px] max-w-[450px] rounded-lg ${
+                        isBotVisible ? "block" : "hidden"
+                      }`}
+                      height="100%"
+                      frameborder="0"
+                      allow="geolocation; microphone; camera; midi; encrypted-media;"
+                      src="https://chatbot.hellotars.com/conv/PWIlnd/"
+                    ></iframe>
+                    <script
+                      type="text/javascript"
+                      src="https://tars-file-upload.s3.amazonaws.com/bulb/js/fullpage.js"
+                    ></script>
+                  </div>
                 </button>
               </div>
             </div>

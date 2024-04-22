@@ -5,7 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-
 export default function BasicSelect() {
   const [cat, setCat] = React.useState("");
 
@@ -24,6 +23,7 @@ export default function BasicSelect() {
           label="cat"
           onChange={handleChange}
         >
+           {/* Adding categories here */}
           <MenuItem value="other-stationary">Other Stationary</MenuItem>
           <MenuItem value="clothing_essentials">Clothing Essentials</MenuItem>
           <MenuItem value="books">Books</MenuItem>

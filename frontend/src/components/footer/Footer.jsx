@@ -48,7 +48,6 @@ function Footer() {
             Subscribe
           </button>
         </div>
-        
       </FooterSection>
 
       <FooterSection extraClass="mt-12 hidden md:block">
