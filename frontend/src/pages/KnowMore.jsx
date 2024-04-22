@@ -15,6 +15,8 @@ function KnowMore() {
   const [isFetching, setIsFetching] = useState(true);
   const a = ["", "bad", "average", "good", "very good", "excellent"];
 
+  const[isBotVisible, setIsBotVisible] = useState(false);
+
   const CallAboutPage = async () => {
     setIsFetching(true);
     console.log("Call about");
@@ -296,9 +298,19 @@ function KnowMore() {
                     </ul>
                   </div>
                 </div>
-                <div>
-                  <Chat id={Data[0].list[0]._id} />
+                <button className=""
+                  onClick={() => setIsBotVisible(!isBotVisible)}
+                ><span className="bg-blue-500 rounded-xl px-4 py-1 text-white text-xl"> Chat </span>
+                <div id="tars-fullpage-container" class="tars-fullpage-container-class">
+                  <iframe id="tars-fullpage" width="100%"
+                    // style={`${display= ""}`}
+                    className={`mt-2 shadow-lg min-h-[400px] max-w-[450px] rounded-lg ${isBotVisible ?'block':'hidden'}`}
+                    height="100%" frameborder="0" allow="geolocation; microphone; camera; midi; encrypted-media;"
+                    src="https://chatbot.hellotars.com/conv/PWIlnd/">
+                  </iframe>
+                  <script type="text/javascript" src="https://tars-file-upload.s3.amazonaws.com/bulb/js/fullpage.js"></script>
                 </div>
+                </button>
               </div>
             </div>
           </div>
