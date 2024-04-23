@@ -237,7 +237,7 @@ function KnowMore() {
                     </ul>
                   </div>
                 </div>
-                <button
+{/*                 <button
                   className=""
                   onClick={() => setIsBotVisible(!isBotVisible)}
                 >
@@ -265,7 +265,10 @@ function KnowMore() {
                       src="https://tars-file-upload.s3.amazonaws.com/bulb/js/fullpage.js"
                     ></script>
                   </div>
-                </button>
+                </button> */}
+                <div>
+                <Chat id={Data[0].list[0]._id} />
+                </div>
               </div>
             </div>
           </div>
