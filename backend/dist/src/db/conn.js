@@ -1,50 +1,23 @@
-// Importing required libraries
-const express = require("express");
-const cors = require("cors");
-const http = require("http");
-const { Server } = require("socket.io");
-
-// Creating an express app
-const app = express();
-
-// Using middleware for parsing and cors
-app.use(express.json());
-app.use(cors());
-
-// Define the port you want to use
-const PORT = process.env.PORT || 4000; // You can change the port number here
-
-// Creating an http server with the defined port
-const server = http.createServer(app);
-
-// Initialising Socket.io with the http server
-const io = new Server(server, {
-    cors: {
-        origin: '*',
-        methods: ['GET', 'POST'],
-    },
-});
-
-// Using Socket.io for chat purposes
-io.on('connection', (socket) => {
-    // Joining a room
-    socket.on('join_room', (data) => {
-        socket.join(data);
-        console.log("User joined room:", data);
-    });
-
-    // Sending a message to a room
-    socket.on('send_message', (data) => {
-        io.to(data.room).emit('receive_message', data);
-    });
-
-    // Disconnecting from a room
-    socket.on('disconnect', () => {
-        console.log("User disconnected");
-    });
-});
-
-// Start the server and listen on the defined port
-server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// Importing the mongoose library
+const mongoose_1 = __importDefault(require("mongoose"));
+const url='mongodb+srv://VITBAZAAR:6001322174@cluster0.0oaqvtg.mongodb.net/'
+// Connecting to the MongoDB database using the connection string from the environment variable DB
+// Check if process.env.DB has a value
+if (url) {
+    // The connect method returns a promise that resolves when the connection is successful
+    mongoose_1.default
+        .connect(url)
+        // If the connection is successful, log a message to the console
+        .then(() => console.log('Connection is successful'))
+        // If there is an error while connecting, log the error to the console
+        .catch((err) => console.log(err));
+}
+else {
+    // Handle the case where process.env.DB is undefined
+    console.error('No connection string provided in process.env.DB');
+}
